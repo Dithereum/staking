@@ -1,41 +1,23 @@
-module.exports = (sequelize, Sequelize) => {
+module.exports = app => {
+  const validators = require("../controllers/validator.controller.js");
 
-const Validator = sequelize.define("validator", {
-	validatorName: {
-		type: Sequelize.STRING
-	},
-	validatorDescription: {
-		type: Sequelize.STRING
-	},
-	validatorWalletAddress: {
-		type: Sequelize.STRING	
-	},
-	validatorFeeAddress: {
-		type: Sequelize.STRING
-	},
-	validatorSelfStaked: {
-		type: Sequelize.BIGINT
-	},
-	validatorDeligatorStaked: {
-		type: Sequelize.BIGINT
-	},
-	validatorAPR: {
-		type: Sequelize.FLOAT
-	},
-	validatorCommission: {
-		type: Sequelize.FLOAT
-	},
-	joiningTimestamp: {
-		type: Sequelize.DATE(6)
-	},
-	status: {
-		type: Sequelize.STRING
-	},
-	id: {
-		type: Sequelize.INTEGER,
-		primaryKey: true,
-		autoIncrement: true
-	}
-});
-	return Validator;
+  var router = require("express").Router();
+
+  // Create a new validator
+  // router.post("/", validators.create);
+
+  // Update a VAlidator with id
+  //router.put("/:id", validators.update);
+
+  // count all activevalidators
+  router.get("/activevalidators", validators.activevalidators);
+    
+  // get bonded_tokens
+  router.get("/bondedtokens", validators.bondedTokens);
+  
+  // getAll validators
+  router.get("/getValidators", validators.getAll);
+  
+  app.use('/api/validators', router);
 };
+
