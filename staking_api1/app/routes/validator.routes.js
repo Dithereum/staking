@@ -18,6 +18,9 @@ module.exports = app => {
   // getAll validators
   router.get("/getValidators", validators.getAll);
   
+  // getallvalidators
+  router.get("/getallvalidators", validators.getAllValidators);
+  
   app.use('/api/validators', router);
 };
 
