@@ -157,7 +157,7 @@ exports.getAllValidators = (req, res)=>{
 		////###
 		var validatorslist = [];
 		var v = await Validator.findAll({
-			attributes: [ 'validatorName', 'validatorCommission', 'validatorAPR', 'status', 'validatorSelfStaked', 'validatorDeligatorStaked' ],
+			attributes: [ 'validatorName', 'validatorWalletAddress', 'validatorCommission', 'validatorAPR', 'status', 'validatorSelfStaked', 'validatorDeligatorStaked' ],
 		}).catch(err=>{
 			res.status(500).send({
 					message:
@@ -170,6 +170,7 @@ exports.getAllValidators = (req, res)=>{
 			var vperc = vpower/100;
 			var myob = {
 					"validatorName": myvalidator.dataValues.validatorName,
+				        "validatorWalletAddress": myvalidator.dataValues.validatorWalletAddress, 
 					"validatorCommission": myvalidator.dataValues.validatorCommission.toString() +"%",
 					"validatorAPR": myvalidator.dataValues.validatorAPR.toString() +"%",
 					"status": myvalidator.dataValues.status,
