@@ -1,6 +1,5 @@
 $(document).ready(function(){
 apiURL = 'https://api.dithereum.io/getallvalidators';
-
     async function init(){
         const fetchResponse =  await fetch(apiURL);
         const edata = await fetchResponse.json();   
@@ -17,8 +16,7 @@ apiURL = 'https://api.dithereum.io/getallvalidators';
                     const status = element.status;
                     const validator = element.validatorName;
                     const voting_power = element.votingpower;
-                    const voting_percent = element.voting_percent;
-                    
+                    const voting_percent = element.voting_percent;       
 
                     tblData+='<tr>'+
                                 '<td><a class=""><img src="https://raw.githubusercontent.com/binance-chain/validator-directory/main/validators/bva1z0g0cg8dkgczr6r8t6khva3srn5mwj8w5tlu7h/logo.png" class="gYNxxe" style="width: 24px;"> '+validator+'</a></td>'+
@@ -30,8 +28,7 @@ apiURL = 'https://api.dithereum.io/getallvalidators';
                             '</tr>';
                 });
                 $("#validatorsTable").html(tblData);
-            }
-        
+            }        
     }
     setTimeout(init,1000);
 });
