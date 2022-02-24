@@ -112,3 +112,78 @@ exports.getAll = (req, res)=>{
 		});
 	});
 }
+
+
+//getAllValidators  - single request to get all data
+//http://localhost:9980/api/validators/getallvalidators
+exports.getAllValidators = (req, res)=>{	
+	async function  myfunction(){
+		var data = {};
+		data['activeValidators'] = '';
+		data['bondedtokens'] = '';
+		data["validators_list"] = [];	
+		var activeValidators = await Validator.count({
+			attributes: ['validatorName'],
+			group: 'validatorName',
+			where: { status: "Active"}
+		}).catch(err=>{
+			res.status(500).send({
+					message:
+	         	 err.message || "Some error occurred while retrieving validators."
+			});
+		});
+		data['activeValidators'] = activeValidators.length;
+		
+		/////---
+		var bt = await Validator.findAll({
+			attributes: [
+				[ 
+					sequelize.fn('SUM',(sequelize.fn('COALESCE', (sequelize.col('validatorSelfStaked')), 0))), 'sum_selfstake'
+				],
+   			[ 
+					sequelize.fn('SUM',(sequelize.fn('COALESCE', (sequelize.col('validatorDeligatorStaked')), 0))), 'sum_deligatorstake'
+				],
+			], 
+		}).catch(err=>{
+			res.status(500).send({
+					message:
+	         	 err.message || "Some error occurred while retrieving validators."
+			});
+		});	
+
+		var bondedtokens = parseInt(bt[0].dataValues.sum_selfstake) + parseInt(bt[0].dataValues.sum_deligatorstake);	
+		data['bondedtokens']=bondedtokens;		
+		/////---
+		////###
+		var validatorslist = [];
+		var v = await Validator.findAll({
+			attributes: [ 'validatorName', 'validatorCommission', 'validatorAPR', 'status', 'validatorSelfStaked', 'validatorDeligatorStaked' ],
+		}).catch(err=>{
+			res.status(500).send({
+					message:
+	         	 err.message || "Some error occurred while retrieving validators."
+			});
+		});
+		
+		v.forEach((myvalidator)=>{		
+			var vpower = parseInt(myvalidator.dataValues.validatorSelfStaked) + parseInt(myvalidator.dataValues.validatorDeligatorStaked);
+			var vperc = vpower/100;
+			var myob = {
+					"validatorName": myvalidator.dataValues.validatorName,
+					"validatorCommission": myvalidator.dataValues.validatorCommission.toString() +"%",
+					"validatorAPR": myvalidator.dataValues.validatorAPR.toString() +"%",
+					"status": myvalidator.dataValues.status,
+					"validatorSelfStaked": myvalidator.dataValues.validatorSelfStaked,
+					"validatorDeligatorStaked": myvalidator.dataValues.validatorDeligatorStaked,
+					"votingpower": vpower.toString() +" / "+ vperc.toString() +"%"
+			}			
+			validatorslist.push(myob);			
+		});
+		data["validators_list"]=validatorslist;   		
+		///###
+		return data;
+	}
+	myfunction().then((x)=>{
+		res.send(x);
+	});
+}
