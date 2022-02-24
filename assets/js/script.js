@@ -1,5 +1,5 @@
 $(document).ready(function(){
-apiURL = 'htts://api.dithereum.io/getallvalidators';
+apiURL = 'https://api.dithereum.io/getallvalidators';
 
     async function init(){
         const fetchResponse =  await fetch(apiURL);
