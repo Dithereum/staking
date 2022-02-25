@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var address ="";
     if (window.location.href.indexOf('address') > 0) {
-        address = window.location.href.substr(51) // 48
+        address = window.location.href.substr(52) // 48
       }
     console.log(address);
     if(address!=""){
