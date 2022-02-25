@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/alertify.min.css">
   </head>
   <body>
     <header>
@@ -47,13 +48,13 @@
               <li class="media">
                 <img src="assets/img/DithereumIconFavicon.png" class="mr-3" alt="...">
                 <div class="media-body">
-                  <h5 class="mt-0 mb-1">DTH III</h5>
+                  <h5 class="mt-0 mb-1" id="delegatorName">DTH III</h5>
                   Low Commission. High APR %. Reliable. Legend@DirectStaking.com
                 </div>
               </li>
             </ul> 
             <div class="btn-delegate pl-5">
-              <button style="margin-top: 15px;" class="btn btn-outline-primary btn-sm">Delegate</button>
+              <button style="margin-top: 15px;" id="delegateBtn" class="btn btn-outline-primary btn-sm">Delegate</button>
             </div> 
           </div>
           <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -71,7 +72,7 @@
             <div class="card-body">
               <div class="header-content mb-3">
                 <p class="m-0"> Voting Power</p>
-                <h6><span>909,843.59135299 BNB</span></h6>
+                <h6><span id="voting_power">0 DTH</span></h6>
               </div>
               <div class="rate">
                 <div class="row">
@@ -84,10 +85,10 @@
                 </div>
                 <div class="row">
                   <div class="col-md-8 col-sm-12 col-12">
-                    <p class="mb-0">5.00%<span class="font-size-12">(Update 11 months ago)</span></p>
+                    <p class="mb-0" id="commision_rate">0.00%<span class="font-size-12">(Update 0 months ago)</span></p>
                   </div>
                   <div class="col-md-4 col-sm-12 col-12">
-                    <p class="mb-0">10.52%</p>
+                    <p class="mb-0" id="apr">0.0%</p>
                   </div>
                 </div>
                 <hr class="hr">
@@ -96,36 +97,36 @@
                 <ul class="list-group">
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     Status
-                    <span class="badge bg-success text-light rounded-pill">Active</span>
+                    <span id="status" class="badge bg-success text-light rounded-pill">Active</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     Self Stake
-                    <span class="badge">12,000</span>
+                    <span class="badge" id="self_stake">0</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     Delegators
-                    <span class="badge">6,222</span>
+                    <span class="badge" id="delegators">0</span>
                   </li>
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     Since Time
-                    <span class="badge">2021-03-15</span>
+                    <span class="badge" id="timestamp"></span>
                   </li>
                 </ul>
                 <div class="address">
                   <p class="mb-0">Operator Address</p>
-                  <h6 class="text-dark font-size-12">bva1z0g0cg8dkgczr6r8t6khva3srn5mwj8w5tlu7h</h6>
+                  <h6 class="text-dark font-size-12" id="operator_address"></h6>
                 </div>
                 <div class="address">
                   <p class="mb-0">Self Delegate Address</p>
-                  <h6 class="text-dark font-size-12">bva1z0g0cg8dkgczr6r8t6khva3srn5mwj8w5tlu7h</h6>
+                  <h6 class="text-dark font-size-12" id="self_delegate_address"></h6>
                 </div>
                 <div class="address">
                   <p class="mb-0">Consensus Address</p>
-                  <h6 class="text-dark font-size-12">bva1z0g0cg8dkgczr6r8t6khva3srn5mwj8w5tlu7h</h6>
+                  <h6 class="text-dark font-size-12" id="consensus_address"></h6>
                 </div>
                 <div class="address">
                   <p class="mb-0">Fee Address</p>
-                  <h6 class="text-dark font-size-12">bva1z0g0cg8dkgczr6r8t6khva3srn5mwj8w5tlu7h</h6>
+                  <h6 class="text-dark font-size-12" id="fee_address"></h6>
                 </div>
               </div>
             </div>
@@ -145,7 +146,7 @@
               <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-delegators" role="tabpanel" aria-labelledby="pills-delegators-tab">
                   <div class="total-delegators">
-                    <p class="text-left mb-0" style="font-size: 16px;"><span>6230 </span>delegators</p>
+                    <p class="text-left mb-0" style="font-size: 16px;"><span id="totalDelegators">0 </span>delegators</p>
                   </div>
                   <div class="teble-responsive">
                     <table class="table">
@@ -155,35 +156,12 @@
                           <th scope="col">Amount</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
+                      <tbody id="delegatorsTable">
+                       
+                        <!--<tr>
                           <td>bnb1crxhdxnmzelcmmjfzfur29y8dqaan43w293sre</td>
                           <td>82,233.28431145 BNB</td>
-                        </tr>
-                        <tr>
-                          <td>bnb1crxhdxnmzelcmmjfzfur29y8dqaan43w293sre</td>
-                          <td>82,233.28431145 BNB</td>
-                        </tr>
-                        <tr>
-                          <td>bnb1crxhdxnmzelcmmjfzfur29y8dqaan43w293sre</td>
-                          <td>82,233.28431145 BNB</td>
-                        </tr>
-                        <tr>
-                          <td>bnb1crxhdxnmzelcmmjfzfur29y8dqaan43w293sre</td>
-                          <td>82,233.28431145 BNB</td>
-                        </tr>
-                        <tr>
-                          <td>bnb1crxhdxnmzelcmmjfzfur29y8dqaan43w293sre</td>
-                          <td>82,233.28431145 BNB</td>
-                        </tr>
-                        <tr>
-                          <td>bnb1crxhdxnmzelcmmjfzfur29y8dqaan43w293sre</td>
-                          <td>82,233.28431145 BNB</td>
-                        </tr>
-                        <tr>
-                          <td>bnb1crxhdxnmzelcmmjfzfur29y8dqaan43w293sre</td>
-                          <td>82,233.28431145 BNB</td>
-                        </tr>
+                        </tr> -->
                       </tbody>
                     </table>
                   </div>
@@ -200,82 +178,44 @@
                           <th scope="col">Action</th>
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td>bnb1r***2f88k</td>
-                          <td>4.00 BNB</td>
-                          <td>Delegate</td>
-                          <td>2022-02-21 15:05:37</td>
-                          <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
-                        </tr>
-                        <tr>
-                          <td>bnb1r***2f88k</td>
-                          <td>4.00 BNB</td>
-                          <td>Delegate</td>
-                          <td>2022-02-21 15:05:37</td>
-                          <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
-                        </tr>
-                        <tr>
-                          <td>bnb1r***2f88k</td>
-                          <td>4.00 BNB</td>
-                          <td>Delegate</td>
-                          <td>2022-02-21 15:05:37</td>
-                          <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
-                        </tr>
-                        <tr>
-                          <td>bnb1r***2f88k</td>
-                          <td>4.00 BNB</td>
-                          <td>Delegate</td>
-                          <td>2022-02-21 15:05:37</td>
-                          <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
-                        </tr>
-                        <tr>
-                          <td>bnb1r***2f88k</td>
-                          <td>4.00 BNB</td>
-                          <td>Delegate</td>
-                          <td>2022-02-21 15:05:37</td>
-                          <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
-                        </tr>
-                        <tr>
-                          <td>bnb1r***2f88k</td>
-                          <td>4.00 BNB</td>
-                          <td>Delegate</td>
-                          <td>2022-02-21 15:05:37</td>
-                          <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
-                        </tr>
-                        <tr>
-                          <td>bnb1r***2f88k</td>
-                          <td>4.00 BNB</td>
-                          <td>Delegate</td>
-                          <td>2022-02-21 15:05:37</td>
-                          <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
-                        </tr>
-                      </tbody>
-                    </table>
+                      <tbody id="stakingsTable">
+                          <!-- <tr>
+                              <td>bnb1r***2f88k</td>
+                              <td>4.00 BNB</td>
+                              <td>Delegate</td>
+                              <td>2022-02-21 15:05:37</td>
+                              <td><a href="#"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>
+                            </tr> -->
+
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <footer class="footer bg-light py-3 mt-5">
-      <div class="container">
-      <div class="row">
-        <div class="col-md-12 text-center">
-          <p class="m-0">© 2021 onwards - Dithereum. All rights reserved</p>
-        </div>
-      </div>
-      </div>
-    </footer>
-<!-- Bootstrap -->
-    <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-<!-- Web3 -->
-    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
-    
-  </body>
+        <footer class="footer bg-light py-3 mt-5">
+          <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <p class="m-0">© 2021 onwards - Dithereum. All rights reserved</p>
+            </div>
+          </div>
+          </div>
+        </footer>
+    <!-- Bootstrap -->
+                          <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
+                          <script src="assets/js/popper.min.js"></script>
+                          <script src="assets/js/bootstrap.min.js"></script>
+                          <script src="assets/js/alertify.js"></script>
+                          <!-- Web3 -->
+                          <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+                          <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+                          <script src="assets/js/general.js"></script>
+                          <script src="assets/js/delegate.js"></script>
+</body>
 </html>
