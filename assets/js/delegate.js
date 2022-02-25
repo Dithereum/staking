@@ -15,7 +15,7 @@ $(document).ready(function(){
         var stakingData = "";
         var delegatorsData = "";
             $('#delegatorName').html(edata.delegater_name);
-            $('#voting_power').html(edata.voting_power.voting_power);
+            $('#voting_power').html(edata.voting_power[0].voting_power);
             $('#totalDelegators').html(edata.total_delegators);
             $('#status').html(edata.status);
             $('#commision_rate').html(edata.commission_rate);
