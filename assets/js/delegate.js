@@ -6,7 +6,7 @@ $(document).ready(function(){
     console.log(address);
     if(address!=""){
     const apiURL = 'https://api.dithereum.io/getstaker/'+address;
-    const eventURL =  "https://testnet.dthscan.io/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address="+contractAddress+"&topic0=0xb9ba725934532316cffe10975da6eb25ad49c2d1c294d982c46c9f8d684ee075";
+   
     async function init(){
         contractInstance = new myweb3.eth.Contract(ABI, contractAddress, {
             from: myAccountAddress, // default from address
@@ -53,46 +53,50 @@ $(document).ready(function(){
             //     $("#stakingsTable").html(stakingData);
             // }   
             
-            //staking api
-            const fetchResponse2 =  await fetch(eventURL);
-            const edata2 = await fetchResponse2.json();   
-            console.log(edata2);
-            if(edata2.message="OK"){
-                const stakings = edata2.result;
-                if(stakings.length>0){
-                        stakings.forEach(element => {
-                            var timeStamp = myweb3.utils.hexToNumber(element.timeStamp);
-                            var d = new Date(timeStamp);
-                            var hours = d.getHours();
-                            var minutes = d.getMinutes();
-                            var seconds = d.getSeconds();
-                            if(hours<10){ hours = '0' + hours; }
-                            if(minutes<10){ minutes = '0' + minutes;  }
-                            if(seconds<10){ seconds = '0' + seconds ; }            
-                            timestamp = (d.getFullYear() + '-' +d.getMonth()+1) + '-' + d.getDate() +  ' ' + hours + ':'+ minutes + ':' + seconds;
-                            var userWallet = element.topics[0];
-                            userWallet = '0x'+address.substr(26);
-                            userWallet = getUserAddress(userWallet);
-                            var data = element.data;
-                            var amount = data.substr(0,66);
-                            amount = '0x'+amount.substr(26);
-                            amount = amount /1e18;
-                            var transactionHash = element.transactionHash;
-                            stakingData+='<tr>'+
-                                        '<td>'+userWallet+'</td>'+
-                                        '<td>'+amount+' DTH</td>'+
-                                        '<td>Delegate</td>'+
-                                        '<td>'+element.timeStamp+'</td>'+
-                                        '<td><a href="https://testnet.dthscan.io/tx/'+transactionHash+'"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>'+
-                                    '</tr>';
-                        });
-                        $("#stakingsTable").html(stakingData);
-                    }   
-            }
+            
             
     }
     setTimeout(init,1000);
 
+    $('#pills-stakings-tab').click(async function(){
+        //staking api
+        const eventURL =  "https://testnet.dthscan.io/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address="+contractAddress+"&topic0=0xb9ba725934532316cffe10975da6eb25ad49c2d1c294d982c46c9f8d684ee075";
+        const fetchResponse2 =  await fetch(eventURL);
+        const edata2 = await fetchResponse2.json();   
+       
+        if(edata2.message="OK"){
+            const stakings = edata2.result;
+            if(stakings.length>0){
+                    stakings.forEach(element => {
+                        var timeStamp = myweb3.utils.hexToNumber(element.timeStamp);
+                        var d = new Date(timeStamp);
+                        var hours = d.getHours();
+                        var minutes = d.getMinutes();
+                        var seconds = d.getSeconds();
+                        if(hours<10){ hours = '0' + hours; }
+                        if(minutes<10){ minutes = '0' + minutes;  }
+                        if(seconds<10){ seconds = '0' + seconds ; }            
+                        timestamp = (d.getFullYear() + '-' +d.getMonth()+1) + '-' + d.getDate() +  ' ' + hours + ':'+ minutes + ':' + seconds;
+                        var userWallet = element.topics[0];
+                        userWallet = '0x'+userWallet.substr(26);
+                        userWallet = getUserAddress(userWallet);
+                        var data = element.data;
+                        var amount = data.substr(0,66);
+                        amount = '0x'+amount.substr(26);
+                        amount = amount /1e18;
+                        var transactionHash = element.transactionHash;
+                        stakingData+='<tr>'+
+                                    '<td>'+userWallet+'</td>'+
+                                    '<td>'+amount+' DTH</td>'+
+                                    '<td>Delegate</td>'+
+                                    '<td>'+timestamp+'</td>'+
+                                    '<td><a target="_blank" href="https://testnet.dthscan.io/tx/'+transactionHash+'"><i class="fa fa-external-link-square" aria-hidden="true"></i></a></td>'+
+                                '</tr>';
+                    });
+                    $("#stakingsTable").html(stakingData);
+                }   
+        }
+    });
     $('#delegateBtn').click(async function(){
         if (window.ethereum) {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
