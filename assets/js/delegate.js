@@ -60,7 +60,8 @@ $(document).ready(function(){
 
     $('#pills-stakings-tab').click(async function(){
         //staking api
-        const eventURL =  "https://testnet.dthscan.io/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address="+contractAddress+"&topic0=0xb9ba725934532316cffe10975da6eb25ad49c2d1c294d982c46c9f8d684ee075";
+        var encodedAddress = '0x'+'000000000000000000000000'+address.substr(2);
+        const eventURL =  "https://testnet.dthscan.io/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address="+contractAddress+"&topic0=0xb9ba725934532316cffe10975da6eb25ad49c2d1c294d982c46c9f8d684ee075&topic2="+encodedAddress+"&topic0_2_opr=and";
         const fetchResponse2 =  await fetch(eventURL);
         const edata2 = await fetchResponse2.json();   
        
@@ -69,7 +70,7 @@ $(document).ready(function(){
             if(stakings.length>0){
                 var stakingData = "";
                     stakings.forEach(element => {
-                        var timeStamp = myweb3.utils.hexToNumber(element.timeStamp);
+                        var timeStamp = parseInt(element.timeStamp);
                         var d = new Date(timeStamp);
                         var hours = d.getHours();
                         var minutes = d.getMinutes();
