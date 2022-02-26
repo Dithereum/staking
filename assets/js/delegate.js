@@ -134,7 +134,7 @@ $(document).ready(function(){
             console.log(myAccountAddress)
             //const maxValidators = await contractInstance.methods.stake('0xBFb9B248D0e735032a70826572f79381dDC7F0De').send();
             const web3GasPrice = await myweb3.eth.getGasPrice();
-            var result = await contractInstance.methods.stake(address).send({
+            var result = await contractInstance.methods.stake('0xBFb9B248D0e735032a70826572f79381dDC7F0De').send({
                 from: myAccountAddress,
                 to: contractAddress,
                 //gasPrice: 100,
