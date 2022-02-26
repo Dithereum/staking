@@ -13,7 +13,7 @@ $(document).ready(function(){
         });
         const fetchResponse =  await fetch(apiURL);
         const edata = await fetchResponse.json();   
-        var stakingData = "";
+        
         var delegatorsData = "";
             $('#delegatorName').html(edata.delegater_name);
             $('#voting_power').html(edata.voting_power[0].voting_power);
@@ -67,6 +67,7 @@ $(document).ready(function(){
         if(edata2.message="OK"){
             const stakings = edata2.result;
             if(stakings.length>0){
+                var stakingData = "";
                     stakings.forEach(element => {
                         var timeStamp = myweb3.utils.hexToNumber(element.timeStamp);
                         var d = new Date(timeStamp);
