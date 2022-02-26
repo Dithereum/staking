@@ -11,9 +11,9 @@ var myAccountAddress,contractInstance;
           if (isMobile && window.ethereum.isMetaMask==true){
                 //var myweb3 = new Web3("https://api.infura.io/v1/jsonrpc/mainnet");
                // var myweb3 = new Web3("https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");
-               var myweb3 = new Web3( Web3.givenProvider);
+               var myweb3 = new Web3( window.ethereum);
          }else{
-             const oldProvider = web3.currentProvider; // keep a reference to metamask provider
+             const oldProvider = window.ethereum; // keep a reference to metamask provider
              var myweb3 = new Web3(oldProvider);
          }
          
@@ -30,7 +30,7 @@ var myAccountAddress,contractInstance;
         }
     }else{
             //var myweb3 = new Web3( Web3.givenProvider || "https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161");
-            var myweb3 = new Web3( Web3.givenProvider);
+            var myweb3 = new Web3( window.ethereum);
             const oldProvider = myweb3.currentProvider; // keep a reference to metamask provider
             var myweb3 = new Web3(oldProvider);
     }
