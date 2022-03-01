@@ -15,27 +15,24 @@ $(document).ready(function(){
         const edata = await fetchResponse.json();   
         
         var delegatorsData = "";
-            $('#delegatorName').html(edata.delegater_name);
-            $('#voting_power').html(edata.voting_power[0].voting_power);
-            $('#totalDelegators').html(edata.total_delegators);
-            $('#status').html(edata.status);
-            $('#commision_rate').html(edata.commission_rate);
-            $('#apr').html(edata.APR+'%');
-            $('#self_stake').html(edata.SELF_STAKE);
-            $('#delegators').html(edata.Delegators);
-            $('#timestamp').html(edata.Since_Time);
-            $('#operator_address').html(edata.Operator_Address);
-            $('#self_delegate_address').html(edata.Self_Delegate_Address);
-            $('#fee_address').html(edata.Fee_Address);
-            $('#consensus_address').html(edata.Consensus_Address);
+           // $('#delegatorName').html(edata.delegater_name);
+            $('#voting_power').html(edata.left_panel[0].Voting_Power);
+            $('#totalDelegators').html(edata.left_panel[1].total_delegators);
+            $('#status').html(edata.left_panel[0].Status);
+            $('#commision_rate').html(edata.left_panel[0].Commission_Rate);
+            $('#apr').html(edata.left_panel[0].APR+'%');
+            $('#self_stake').html(edata.left_panel[0].Self_Staked);
+            $('#delegators').html(edata.left_panel[1].total_delegators);
+            $('#timestamp').html(edata.left_panel[0].Since_Time);
+            $('#fee_address').html(edata.left_panel[0].Fee_Address);
                        
-            const delegators = edata.delegators;
+            const delegators = edata.delegator_tab;
             //const stakings = edata.staking;
             if(delegators.length>0){
                 delegators.forEach(element => {
                     delegatorsData+='<tr>'+
-                                '<td>'+element.stakerAddress+'</td>'+
-                                '<td>'+element.sum_stake+' DTH</td>'+
+                                '<td>'+element.validatorWalletAddress+'</td>'+
+                                '<td>'+element.Amount+' DTH</td>'+
                             '</tr>';
                 });
                 $("#delegatorsTable").html(delegatorsData);
@@ -61,6 +58,7 @@ $(document).ready(function(){
     $('#pills-stakings-tab').click(async function(){
         //staking api
         var encodedAddress = '0x'+'000000000000000000000000'+address.substr(2);
+        encodedAddress = encodedAddress.toLowerCase();
         const eventURL =  "https://testnet.dthscan.io/api?module=logs&action=getLogs&fromBlock=0&toBlock=latest&address="+contractAddress+"&topic0=0xb9ba725934532316cffe10975da6eb25ad49c2d1c294d982c46c9f8d684ee075&topic2="+encodedAddress+"&topic0_2_opr=and";
         const fetchResponse2 =  await fetch(eventURL);
         const edata2 = await fetchResponse2.json();   
