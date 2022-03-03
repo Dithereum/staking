@@ -3,3 +3,4 @@ README FILE
 http://localhost:9980/api/validators/getValidators
 http://localhost:9980/api/validators/bondedtokens
 http://localhost:9980/api/validators/activevalidators
+https://api.dithereum.io/getallvalidators   -> single call return all above
