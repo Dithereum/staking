@@ -27,7 +27,7 @@ apiURL = 'https://api.dithereum.io/getallvalidators';
                                 '<td>'+comission+'</td>'+
                                 '<td>'+apr+'</td>'+
                                 '<td><span class="badge bg-success">'+status+'</span></td>'+
-                                '<td>Stake</td>'+
+                                '<td><button style="margin-top: 15px;" class="btnStake btn btn-outline-primary btn-sm">Stake</button></td>'+
                             '</tr>';
                 });
                 $("#validatorsTable").html(tblData);
