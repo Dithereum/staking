@@ -13,7 +13,7 @@ $(document).ready(function(){
         });
         const fetchResponse =  await fetch(apiURL);
         const edata = await fetchResponse.json();   
-        
+        $('#validator_address').html(address);
         var delegatorsData = "";
            // $('#delegatorName').html(edata.delegater_name);
             $('#voting_power').html(edata.left_panel[0].Voting_Power);
