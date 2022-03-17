@@ -1,17 +1,4 @@
-/*  NEW TASK 02 MARCH 2022
-We now need to work on crons for staking, which runs every minutes.. And sync all the data into both MySQL tables😀
-
-Yogesh Padsala GDO Surat, [02/03/22 1:48 PM]
-[In reply to ninja coder]
-Okk.. Main thing is to fetch events from validator smart contracts.. 
-
-So when user stake, then there wjll be and event.. We have to check for it and put in staking data..
-
-Yogesh Padsala GDO Surat, [02/03/22 1:49 PM]
-And for validator table.. We have to update other details like total staked, etc.. So that also can be updated on its own.. 
-
-I need to figure out how to calculate the APR😜
-
+/*
 ALTER TABLE `stakings` ADD CONSTRAINT UNIQUE (transHash)
 ALTER TABLE `lastblock_fetched` ADD CONSTRAINT UNIQUE (lastblock_pair)
 */
