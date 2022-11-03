@@ -3,7 +3,6 @@ $(document).ready(function(){
     if (window.location.href.indexOf('address') > 0) {
         address = window.location.href.substr(52) // 48
       }
-    console.log(address);
     if(address!=""){
     const apiURL = 'https://api.dithereum.io/getstaker/'+address;
    
@@ -68,7 +67,7 @@ $(document).ready(function(){
             if(stakings.length>0){
                 var stakingData = "";
                     stakings.forEach(element => {
-                        var timeStamp = parseInt(element.timeStamp);
+                        var timeStamp = parseInt(element.timeStamp)*1000;
                         var d = new Date(timeStamp);
                         var hours = d.getHours();
                         var minutes = d.getMinutes();
@@ -98,6 +97,10 @@ $(document).ready(function(){
         }
     });
     $('#delegateBtn').click(async function(){
+        alertify.prompt( 'Staking Dithereum', 'Enter Value', ''
+        ,async function(evt, value) {
+          if($.isNumeric(value)==false){alert('Please enter Valid Amount.'); return false;}
+        //
         if (window.ethereum) {
             const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
                 if (accounts == null || accounts.length == 0) {
@@ -128,8 +131,8 @@ $(document).ready(function(){
            
             var gasLimit = 300000;
             gasLimit = gasLimit.toString();
-            var payableAmount = 32 * 1e18;
-            console.log(myAccountAddress)
+            var payableAmount = value * 1e18;
+            payableAmount = logEtoLongNumber(payableAmount);
             //const maxValidators = await contractInstance.methods.stake('0xBFb9B248D0e735032a70826572f79381dDC7F0De').send();
             const web3GasPrice = await myweb3.eth.getGasPrice();
             var result = await contractInstance.methods.stake('0xBFb9B248D0e735032a70826572f79381dDC7F0De').send({
@@ -146,6 +149,9 @@ $(document).ready(function(){
             }
 
         }
+        //
+    }
+    , function() { alertify.error('Cancel') });
     });
     }
 });
