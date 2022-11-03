@@ -34,3 +34,66 @@ var myAccountAddress,contractInstance;
             const oldProvider = myweb3.currentProvider; // keep a reference to metamask provider
             var myweb3 = new Web3(oldProvider);
     }
+
+
+    async function checkChainID(){
+      const chainID = await myweb3.eth.getChainId();
+      if(chainID!=34){
+        alert('Add Dithereum Network & Switch to Dithereum Network.');
+        addNetwork();
+      }
+    }
+    setTimeout(checkChainID,3000);
+    function addNetwork(){
+      if(window.ethereum) {
+               
+        window.ethereum.request({method: 'eth_requestAccounts'})
+        window.ethereum.request({
+            method: 'wallet_addEthereumChain',
+            params: [{chainId: '0x22', //testnet '0x61',
+                chainName: "Dithereum Testnet",
+                nativeCurrency: {
+                name: "Binance Chain",
+                symbol: "DTH",
+                decimals: 18
+                },
+                rpcUrls: ['https://node-testnet.dithereum.io/'],     blockExplorerUrls: ['https://testnet.dthscan.io/']                    
+            }]
+        })
+            
+      }
+    }
+
+    function logEtoLongNumber(amountInLogE){
+    
+      amountInLogE = amountInLogE.toString();
+      var noDecimalDigits = "";
+    
+      if(amountInLogE.includes("e-")){
+        var splitString = amountInLogE.split("e-"); //split the string from 'e-'
+        noDecimalDigits = splitString[0].replace(".", ""); //remove decimal point
+        //how far decimals to move
+        var zeroString = "";
+        for(var i=1; i < splitString[1]; i++){
+          zeroString += "0";
+        }
+        return  "0."+zeroString+noDecimalDigits;
+      }else if(amountInLogE.includes("e+")){
+        var splitString = amountInLogE.split("e+"); //split the string from 'e+'
+        var ePower = parseInt(splitString[1]);
+        noDecimalDigits = splitString[0].replace(".", ""); //remove decimal point
+        if(ePower >= noDecimalDigits.length-1){
+          var zerosToAdd = ePower  - noDecimalDigits.length;
+          for(var i=0; i <= zerosToAdd; i++){
+            noDecimalDigits += "0";
+          }
+        }else{
+          //this condition will run if the e+n is less than numbers
+          var stringFirstHalf = noDecimalDigits.slice(0, ePower+1);
+          var stringSecondHalf = noDecimalDigits.slice(ePower+1);
+          return stringFirstHalf+"."+stringSecondHalf;
+        }
+        return noDecimalDigits;
+      }
+      return amountInLogE;  //by default it returns stringify value of original number if its not logarithm number
+    }
