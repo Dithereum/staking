@@ -72,10 +72,12 @@ $(document).ready(function(){
                         var hours = d.getHours();
                         var minutes = d.getMinutes();
                         var seconds = d.getSeconds();
+                        var months = d.getMonth();
+                        months = months + 1;
                         if(hours<10){ hours = '0' + hours; }
                         if(minutes<10){ minutes = '0' + minutes;  }
                         if(seconds<10){ seconds = '0' + seconds ; }            
-                        timestamp = (d.getFullYear() + '-' +d.getMonth()+1) + '-' + d.getDate() +  ' ' + hours + ':'+ minutes + ':' + seconds;
+                        timestamp = (d.getFullYear() + '-' +months + '-' + d.getDate() +  ' ' + hours + ':'+ minutes + ':' + seconds;
                         var userWallet = element.topics[1];
                         userWallet = '0x'+userWallet.substr(26);
                         userWallet = getUserAddress(userWallet);
