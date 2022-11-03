@@ -73,7 +73,7 @@ $(document).ready(function(){
                         var minutes = d.getMinutes();
                         var seconds = d.getSeconds();
                         var months = d.getMonth();
-                        months = months + 1;
+                        months = parseInt(months) + 1;
                         if(hours<10){ hours = '0' + hours; }
                         if(minutes<10){ minutes = '0' + minutes;  }
                         if(seconds<10){ seconds = '0' + seconds ; }            
