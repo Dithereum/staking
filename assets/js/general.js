@@ -97,3 +97,32 @@ var myAccountAddress,contractInstance;
       }
       return amountInLogE;  //by default it returns stringify value of original number if its not logarithm number
     }
+
+
+async function checkAccount() {
+  if (window.ethereum) {
+      const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+  
+          if (accounts == null || accounts.length == 0) {
+              console.log("NO ACCOUNT CONNECTED");
+          } else {
+              if (myAccountAddress != accounts[0]) {
+                  myAccountAddress = accounts[0];                    
+              }              
+          }
+      
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+          if (isMobile && window.ethereum.isMetaMask==true){
+                   const accounts_ = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                   if (accounts_ == null || accounts_.length == 0) {
+                      console.log("NO ACCOUNT CONNECTED");
+                  } else {
+                      if (myAccountAddress != accounts_[0]) {
+                          myAccountAddress = accounts_[0];                    
+                      }
+                  }
+      } 
+  }
+}
+
+setTimeout(checkAccount, 500);
