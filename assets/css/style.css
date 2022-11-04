@@ -449,6 +449,30 @@ a:hover {
     background-color: #0062cc;
 }
 
+
+
+
+
+
+
+.delegate-relative {
+    position: relative;
+}
+img.delegate-img {
+    position: absolute;
+    top: -21px;
+    right: 92px;
+    width: 171px;
+    opacity: .2;
+}
+
+
+
+
+
+
+
+
 @media (min-width: 80em){
 .goprvL {
     display: flex;
