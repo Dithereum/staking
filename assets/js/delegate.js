@@ -251,6 +251,7 @@ $(document).ready(function(){
     }//address ends
     setTimeout(getStakingInfo,2000);
     setInterval(getStakingInfo,10000);
+    setInterval(getRewardsInfo,10000);
     $.urlParam = function(name){
         var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
         if (results==null) {
@@ -264,6 +265,12 @@ $(document).ready(function(){
         var stakingInfo = await contractInstance.methods.getStakingInfo(myAccountAddress,validatorAddress).call();
         var stakedAmount = stakingInfo[0]/1e18;
         $('#stakedAmount').html(stakedAmount+' DTH');
+    }
+
+    async function getRewardsInfo(){
+        var rewardsInfo = await contractInstance.methods.viewReward(myAccountAddress).call();
+        var rewardAmount = rewardsInfo/1e18;
+        $('#rewardAmount').html(rewardAmount+' DTH');
     }
 });
 //get short user address
