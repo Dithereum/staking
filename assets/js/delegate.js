@@ -16,15 +16,15 @@ $(document).ready(function(){
             $('#validator_address').html(address);
             var delegatorsData = "";
             // $('#delegatorName').html(edata.delegater_name);
-                $('#voting_power').html(edata.left_panel[0].Voting_Power);
+                $('#voting_power').html(edata.left_panel[0][0].Voting_Power);
                 $('#totalDelegators').html(edata.left_panel[1].total_delegators);
-                $('#status').html(edata.left_panel[0].Status);
-                $('#commision_rate').html(edata.left_panel[0].Commission_Rate);
-                $('#apr').html(edata.left_panel[0].APR+'%');
-                $('#self_stake').html(edata.left_panel[0].Self_Staked);
+                $('#status').html(edata.left_panel[0][0].Status);
+                $('#commision_rate').html(edata.left_panel[0][0].Commission_Rate);
+                $('#apr').html(edata.left_panel[0][0].APR+'%');
+                $('#self_stake').html(edata.left_panel[0][0].Self_Staked);
                 $('#delegators').html(edata.left_panel[1].total_delegators);
-                $('#timestamp').html(edata.left_panel[0].Since_Time);
-                $('#fee_address').html(edata.left_panel[0].Fee_Address);
+                $('#timestamp').html(edata.left_panel[0][0].Since_Time);
+                $('#fee_address').html(edata.left_panel[0][0].Fee_Address);
                         
                 const delegators = edata.delegator_tab;
                 //const stakings = edata.staking;
