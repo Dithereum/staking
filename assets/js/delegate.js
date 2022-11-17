@@ -19,12 +19,23 @@ $(document).ready(function(){
                 $('#voting_power').html(edata.left_panel[0][0].Voting_Power);
                 $('#totalDelegators').html(edata.left_panel[1].total_delegators);
                 $('#status').html(edata.left_panel[0][0].Status);
-                $('#commision_rate').html(edata.left_panel[0][0].Commission_Rate);
+                $('#commision_rate').html(edata.left_panel[0][0].Commission_Rate+ "%");
                 $('#apr').html(edata.left_panel[0][0].APR+'%');
                 $('#self_stake').html(edata.left_panel[0][0].Self_Staked);
                 $('#delegators').html(edata.left_panel[1].total_delegators);
-                $('#timestamp').html(edata.left_panel[0][0].Since_Time);
-                $('#fee_address').html(edata.left_panel[0][0].Fee_Address);
+                var timeStamp = edata.left_panel[0][0].Since_Time;
+                timeStamp = new Date(timeStamp);
+                var hours = timeStamp.getHours();
+                var minutes = timeStamp.getMinutes();
+                var seconds = timeStamp.getSeconds();
+                var months = timeStamp.getMonth();
+                months = parseInt(months) + 1;
+                if(hours<10){ hours = '0' + hours; }
+                if(minutes<10){ minutes = '0' + minutes;  }
+                if(seconds<10){ seconds = '0' + seconds ; }  
+                var date_time = timeStamp.getFullYear() + '-' +months + '-' + timeStamp.getDate() +  ' ' + hours + ':'+ minutes + ':' + seconds;
+                $('#timestamp').html();
+                //$('#fee_address').html(edata.left_panel[0][0].Fee_Address);
                         
                 const delegators = edata.delegator_tab;
                 //const stakings = edata.staking;
