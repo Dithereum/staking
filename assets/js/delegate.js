@@ -21,7 +21,7 @@ $(document).ready(function(){
                 $('#totalDelegators').html(edata.left_panel[1].total_delegators);
                 $('#status').html(edata.left_panel[0][0].Status);
                 $('#commision_rate').html(edata.left_panel[0][0].Commission_Rate+ "%");
-                $('#apr').html(edata.left_panel[0][0].APR+'%');
+               //$('#apr').html(edata.left_panel[0][0].APR+'%');
                 $('#self_stake').html(edata.left_panel[0][0].Self_Staked);
                 $('#delegators').html(edata.left_panel[1].total_delegators);
                 var timeStamp = edata.left_panel[0][0].Since_Time;
