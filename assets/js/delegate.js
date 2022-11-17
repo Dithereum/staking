@@ -12,7 +12,7 @@ $(document).ready(function(){
             });
             const fetchResponse =  await fetch(apiURL);
             const edata = await fetchResponse.json();   
-            console.log(edata);
+            //console.log(edata);
             $('#validator_address').html(address);
             var delegatorsData = "";
             // $('#delegatorName').html(edata.delegater_name);
@@ -34,7 +34,7 @@ $(document).ready(function(){
                 if(minutes<10){ minutes = '0' + minutes;  }
                 if(seconds<10){ seconds = '0' + seconds ; }  
                 var date_time = timeStamp.getFullYear() + '-' +months + '-' + timeStamp.getDate() +  ' ' + hours + ':'+ minutes + ':' + seconds;
-                $('#timestamp').html();
+                $('#timestamp').html(date_time);
                 //$('#fee_address').html(edata.left_panel[0][0].Fee_Address);
                         
                 const delegators = edata.delegator_tab;
