@@ -25,6 +25,7 @@ $(document).ready(function(){
                 $('#delegators').html(edata.left_panel[1].total_delegators);
                 var timeStamp = edata.left_panel[0][0].Since_Time;
                 timeStamp = new Date(timeStamp);
+            console.log(timeStamp);
                 var hours = timeStamp.getHours();
                 var minutes = timeStamp.getMinutes();
                 var seconds = timeStamp.getSeconds();
@@ -34,7 +35,8 @@ $(document).ready(function(){
                 if(minutes<10){ minutes = '0' + minutes;  }
                 if(seconds<10){ seconds = '0' + seconds ; }  
                 var date_time = timeStamp.getFullYear() + '-' +months + '-' + timeStamp.getDate() +  ' ' + hours + ':'+ minutes + ':' + seconds;
-                $('#timestamp').html(date_time);
+                console.log(date_time);    
+            $('#timestamp').html(date_time);
                 //$('#fee_address').html(edata.left_panel[0][0].Fee_Address);
                         
                 const delegators = edata.delegator_tab;
