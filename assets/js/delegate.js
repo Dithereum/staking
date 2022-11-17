@@ -5,7 +5,7 @@ $(document).ready(function(){
       }
     if(address!=""){
         const apiURL = 'https://api.dithereum.io/getstaker/'+address;
-    
+        $('#staking_address').html(getUserAddress(contractAddress));
         async function init(){
             contractInstance = new myweb3.eth.Contract(ABI, contractAddress, {
                 from: myAccountAddress, // default from address
@@ -15,6 +15,7 @@ $(document).ready(function(){
             //console.log(edata);
             $('#validator_address').html(address);
             var delegatorsData = "";
+            $('#validator_address').html(getUserAddress(address));
             // $('#delegatorName').html(edata.delegater_name);
                 $('#voting_power').html(edata.left_panel[0][0].Voting_Power);
                 $('#totalDelegators').html(edata.left_panel[1].total_delegators);
@@ -25,7 +26,7 @@ $(document).ready(function(){
                 $('#delegators').html(edata.left_panel[1].total_delegators);
                 var timeStamp = edata.left_panel[0][0].Since_Time;
                 timeStamp = new Date(timeStamp);
-            console.log(timeStamp);
+           // console.log(timeStamp);
                 var hours = timeStamp.getHours();
                 var minutes = timeStamp.getMinutes();
                 var seconds = timeStamp.getSeconds();
