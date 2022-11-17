@@ -12,6 +12,7 @@ $(document).ready(function(){
             });
             const fetchResponse =  await fetch(apiURL);
             const edata = await fetchResponse.json();   
+            console.log(edata);
             $('#validator_address').html(address);
             var delegatorsData = "";
             // $('#delegatorName').html(edata.delegater_name);
