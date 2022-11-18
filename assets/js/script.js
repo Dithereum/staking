@@ -1,10 +1,10 @@
 $(document).ready(function(){
-apiURL = 'https://api.dithereum.io/getallvalidators';
+var validator_URL = apiURL+'getallvalidators';
     async function init(){
         contractInstance = new myweb3.eth.Contract(ABI, contractAddress, {
             from: myAccountAddress, // default from address
         });
-        const fetchResponse =  await fetch(apiURL);
+        const fetchResponse =  await fetch(validator_URL);
         const edata = await fetchResponse.json();   
         var tblData = "";
         
