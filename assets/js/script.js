@@ -24,7 +24,7 @@ var validator_URL = apiURL+'getallvalidators';
                                 '<td><a href="delegate.html?address='+validatorWalletAddress+'" class=""><img src="https://raw.githubusercontent.com/binance-chain/validator-directory/main/validators/bva1z0g0cg8dkgczr6r8t6khva3srn5mwj8w5tlu7h/logo.png" class="gYNxxe" style="width: 24px;"> '+validator+'</a></td>'+
                                 '<td>'+voting_power+'</td>'+
                                 '<td>'+comission+'</td>'+
-                                '<td>'+apr+'</td>'+
+//                                 '<td>'+apr+'</td>'+
                                 '<td><span class="badge bg-success">'+status+'</span></td>'+
                                 '<td><button data-wallet="'+validatorWalletAddress+'" class="btnStake btn btn-outline-primary btn-sm">Stake</button></td>'+
                             '</tr>';
