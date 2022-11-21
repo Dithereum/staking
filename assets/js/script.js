@@ -26,7 +26,7 @@ var validator_URL = apiURL+'getallvalidators';
                                 '<td>'+comission+'</td>'+
 //                                 '<td>'+apr+'</td>'+
                                 '<td><span class="badge bg-success">'+status+'</span></td>'+
-                                '<td><button data-wallet="'+validatorWalletAddress+'" class="btnStake btn btn-outline-primary btn-sm">Stake</button></td>'+
+                                '<td><a href="delegate.html?address='+validatorWalletAddress+'" class=""><button data-wallet="'+validatorWalletAddress+'" class="btn btn-outline-primary btn-sm">Stake</button></a></td>'+
                             '</tr>';
                 });
                 $("#validatorsTable").html(tblData);
