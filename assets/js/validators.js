@@ -123,7 +123,9 @@ $(document).ready(function(){
                                     '</tr>';
                         });
                         $("#stakingsTxTable").html(stakingData);
-                    }   
+                }else{
+                    $("#stakingsTxTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
+                }    
             }
         }
         async function getUnstakingTxs(){
@@ -166,7 +168,9 @@ $(document).ready(function(){
                                     '</tr>';
                         });
                         $("#UnstakingsTxTable").html(UnstakingData);
-                    }   
+                    } else{
+                        $("#UnstakingsTxTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
+                    }  
             }
         }
         $('#btnStake').click(async function(){
