@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="assets/img/DithereumIconFavicon.png">
+    <title>Hyperonchain Staking Portal</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/alertify.min.css">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand logo" href="index.html">
+          <img src="assets/img/logo.png">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-3">
+              <button id="addDTHNetwork" style="margin-top: 15px;" class="btn btn-outline-primary btn-sm"><img src="assets/img/metamask.png" alt="metamask" style="width: 16px;margin-right: 4px;">Add DTH Network</button>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://t.me/Dithereum" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://twitter.com/dithereum" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="https://www.youtube.com/channel/UCDPzTaaVk4ywEsLaf6nLAeQ" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- <div class="container-heder bg-light p-3"> -->
+      <div class="container mt-5">
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <ul class="list-unstyled">
+                    <li class="media">
+                      
+                      <div class="media-body text-left">
+                        <h5 class="mt-0 mb-1 text-dark" id="delegatorName">Validator Name</h5>
+                        <p><span id="weburl">Website</span><br>
+                         <spn id="otherDetails"></spn></p>
+                      </div>
+                    </li>
+                  </ul> 
+                  <!-- <div class="btn-delegate pl-5">
+                    <button style="margin-top: 15px;" id="delegateBtn" class="btn btn-outline-primary btn-sm">Delegate</button>
+                  </div>  -->
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                  <div class="text-right">
+                    <a href="/">Back to List</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    <!-- </div> -->
+    <div class="container mt-5 height-min">
+
+      <div class="row justify-content-center mb-5">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="card">
+            <div class="card-body delegate-relative">
+              <div class="mb-3 card-header" style="background-color: #90ee90;background-image: none;color: #000!important;">
+                <h5 class="text-left text-dark">Stake</h5>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" id="stakeAmount" placeholder="" aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-success" type="button" id="btnStake">Stake</button>
+                </div>
+              </div>
+              <!-- <img src="assets/img/delegate/stake.png" class="delegate-img"> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="card">
+            <div class="card-body delegate-relative">
+              <div class="mb-3 card-header" style="background-color: #8ad2ea;background-image: none;color: #000!important;">
+                <h5 class="text-left text-dark">Withdraw Profit</h5>
+              </div>
+              <div class="row mb-3">
+                  <div class="col text-left py-2">
+                    <h5 class="text-dark" id="rewardAmount" style="font-size: 15px;">0.0000</h5>
+                  </div>
+                  <div class="col text-right">
+                    <button class="btn btn-outline-primary" type="button" id="btnWithdrawProfits">Withdraw</button>
+                  </div>
+              </div>
+              <!-- <img src="assets/img/delegate/withdrawal.png" class="delegate-img"> -->
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="card">
+            <div class="card-body delegate-relative">
+              <div class="mb-3 card-header" style="background-color: #ff8d63;background-image: none;color: #000!important;">
+                <h5 class="text-left text-dark">Unstake</h5>
+              </div>
+              <div class="row mb-3">
+                  <div class="col text-left py-2">
+                    <h5 class="text-dark" id="stakedAmount" style="font-size: 15px;">0.0000</h5>
+                  </div>
+                  <div class="col text-right">
+                    <button class="btn btn-outline-danger" type="button" id="btnUnStake">Unstake</button>
+                  </div>
+              </div>
+              <!-- <img src="assets/img/delegate/stake-2.png" class="delegate-img"> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="card">
+            <div class="card-body delegate-relative">
+              <div class="mb-3 card-header" style="background-color: #ea63ffb8;background-image: none;color: #000!important;">
+                <h5 class="text-left text-dark">Withdraw Staking</h5>
+              </div>
+              <div class="row mb-3">
+                  <div class="col text-left py-2">
+                    <h5 class="text-dark" id="waitingBlocksForUnstake" style="font-size: 15px;">0 </h5>
+                  </div>
+                  <div class="col text-right">
+                    <button class="btn btn-outline-danger staking-pink" type="button" id="btnWithdrawStaking">Withdraw</button>
+                  </div>
+              </div>
+              <!-- <img src="assets/img/delegate/stake-2.png" class="delegate-img"> -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-5">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 staking-card-left" >
+          <div class="card">
+            <div class="card-body">
+              <div class="header-content mb-3">
+                <h6><p class="m-0"> Validator</p></h6>
+                <p><span id="validator_address">0x00000</span></p>
+
+                <h6><p class="m-0"> Staking Contract</p></h6>
+                <p><span id="stakingContract"><a href="">0x000000000000000000000000000000000000f000</a></span></p>
+              </div>
+              <div class="rate">
+           
+                
+                <hr class="hr">
+              </div>
+              <div class="body-content">
+                <ul class="list-group">
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Status
+                    <div id="status"></div>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Total Staking
+                    <span class="badge" id="totalStaked">0</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Self Stake
+                    <span class="badge" id="self_stake">0</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Total Master Voters
+                    <span class="badge" id="masterVoters">0</span>
+                  </li>
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Total Stakers
+                    <span class="badge" id="totalStakers">0</span>
+                  </li>
+                  
+                </ul>
+               
+               
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-8 col-lg-8 col-md-6 col-sm-12 col-12 text-center staking-card-right">
+          <div class="card">
+            <div class="card-body">
+              <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link active" id="pills-delegators-tab" data-toggle="pill" href="#pills-delegators" role="tab" aria-controls="pills-delegators" aria-selected="true">Staking Transactions</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a class="nav-link" id="pills-stakings-tab" data-toggle="pill" href="#pills-stakings" role="tab" aria-controls="pills-stakings" aria-selected="false">Unstaking Transactions</a>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-delegators" role="tabpanel" aria-labelledby="pills-delegators-tab">
+                  <!-- <div class="total-delegators">
+                    <p class="text-left mb-0" style="font-size: 16px;"><span id="totalDelegators">0</span> delegators</p>
+                  </div> -->
+                  <div class="teble-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Address</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Date</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="stakingsTxTable">
+                        <tr><td colspan="4" style="text-align: center;">Loading Data...</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="pills-stakings" role="tabpanel" aria-labelledby="pills-stakings-tab">
+                  <div class="teble-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Address</th>
+                          <th scope="col">Amount</th>
+                          <th scope="col">Date</th>                          
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="UnstakingsTxTable">
+                        <tr><td colspan="4" style="text-align: center;">Loading Data...</td></tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <footer class="footer bg-light py-3 mt-5">
+          <div class="container">
+          <div class="row">
+            <div class="col-md-12 text-center">
+              <p class="m-0">© 2022 onwards - Hyperon Chain. All rights reserved</p>
+            </div>
+          </div>
+          </div>
+        </footer>
+    <!-- Bootstrap -->
+                          <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
+                          <script src="assets/js/popper.min.js"></script>
+                          <script src="assets/js/bootstrap.min.js"></script>
+                          <script src="assets/js/alertify.js"></script>
+                          <!-- Web3 -->
+                          <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+                          <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+                          <script src="assets/js/general.js"></script>
+                          <script src="assets/js/validators.js"></script>
+</body>
+</html>
