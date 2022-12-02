@@ -33,7 +33,7 @@ $(document).ready(function(){
             tblData+='<tr>'+
                                  '<td><a href="validators.html?address='+getAllValidatorInfo[2][i]+'" class=""><img src="https://raw.githubusercontent.com/binance-chain/validator-directory/main/validators/bva1z0g0cg8dkgczr6r8t6khva3srn5mwj8w5tlu7h/logo.png" class="gYNxxe" style="width: 24px;"> '+validatorName+'</a></td>'+
                                  '<td>'+validatorWeb+'</td>'+
-                                 '<td>'+staked+'</td>'+
+                                 '<td>'+staked+' '+symbol+'</td>'+
 
                                  '<td>'+status+'</td>'+
                                  '<td><a href="validators.html?address='+getAllValidatorInfo[2][i]+'" class=""><button class="btn btn-outline-primary btn-sm">Stake</button></a></td>'+
@@ -53,7 +53,7 @@ $(document).ready(function(){
             tblData+='<tr>'+
                                  '<td><a href="masters.html?address='+getAllMasterVotersInfo[2][i]+'&validator='+getAllMasterVotersInfo[1][i]+'" class="">'+getAllMasterVotersInfo[2][i]+'</a></td>'+
                                  '<td><a href="validators.html?address='+getAllMasterVotersInfo[1][i]+'" class="">'+getAllMasterVotersInfo[1][i]+'</a></td>'+
-                                 '<td>'+staked+'</td>'+
+                                 '<td>'+staked+' '+symbol+'</td>'+
                                  '<td><span class="badge bg-success">Active</span></td>'+
                                  '<td><a href="masters.html?address='+getAllMasterVotersInfo[2][i]+'" class=""><button class="btn btn-outline-primary btn-sm">Stake</button></a></td>'+
                              '</tr>';
