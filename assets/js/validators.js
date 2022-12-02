@@ -28,16 +28,13 @@ $(document).ready(function(){
             minimumStakingAmount = await viewContractInstance.methods.minimumStakingAmount().call(); 
             minimumStakingAmount = minimumStakingAmount/Math.pow(10,decimals);
 
-            //waiting 
-            waitingWithdrawProfit = await viewContractInstance.methods.waitingWithdrawProfit(myAccountAddress,address).call(); 
-            waitingUnstaking = await viewContractInstance.methods.waitingUnstaking(myAccountAddress,address).call(); 
-            waitingWithdrawStaking = await viewContractInstance.methods.waitingWithdrawStaking(myAccountAddress,address).call(); 
-           
             //validators Table data
             const validatorSpecificInfo1 = await viewContractInstance.methods.validatorSpecificInfo1(address,myAccountAddress).call();
             var waitingBlocksForUnstake = validatorSpecificInfo1.waitingBlocksForUnstake;
+            waitingBlocksForUnstake = waitingBlocksForUnstake/Math.pow(10,decimals);
+            waitingBlocksForUnstake = waitingBlocksForUnstake.toFixed(4);
             if(waitingBlocksForUnstake>0){
-                $('#waitingBlocksForUnstake').html(waitingBlocksForUnstake);
+                $('#waitingBlocksForUnstake').html(waitingBlocksForUnstake+' '+symbol);
             }
             if(validatorSpecificInfo1.identityName==""){
                 $('#delegatorName').html(address);
@@ -57,8 +54,11 @@ $(document).ready(function(){
             var stakedAmount = validatorSpecificInfo1.stakedCoins;
             stakedAmount = stakedAmount/Math.pow(10,decimals);
             stakedAmount = stakedAmount.toFixed(4);
-            $('#stakedAmount').html(stakedAmount);                     
-            $('#rewardAmount').html(validatorSpecificInfo1.withdrawableRewards);
+            $('#stakedAmount').html(stakedAmount+' '+symbol); 
+            var withdrawableRewards = validatorSpecificInfo1.withdrawableRewards;
+            withdrawableRewards = withdrawableRewards/Math.pow(10,decimals);
+            withdrawableRewards = withdrawableRewards.toFixed(4);                    
+            $('#rewardAmount').html(withdrawableRewards+' '+symbol);
 
             const validatorSpecificInfo2 = await viewContractInstance.methods.validatorSpecificInfo2(address,myAccountAddress).call();
             var self_stake = validatorSpecificInfo2.selfStakedCoins;
@@ -66,12 +66,12 @@ $(document).ready(function(){
                 self_stake = self_stake/Math.pow(10,decimals);
                 self_stake = self_stake.toFixed(4);
             }
-            $('#self_stake').html(self_stake);
+            $('#self_stake').html(self_stake+' '+symbol);
             $('#totalStakers').html(validatorSpecificInfo2.stakers);
             var totalStaked = validatorSpecificInfo2.totalStakedCoins;
             totalStaked = totalStaked/Math.pow(10,decimals);
             totalStaked = totalStaked.toFixed(4);
-            $('#totalStaked').html(totalStaked);
+            $('#totalStaked').html(totalStaked+' '+symbol);
             var status = validatorSpecificInfo2.status;
             if(status==2){
                 $('#status').html('<span class="badge bg-success text-light rounded-pill">Active</span>');
@@ -81,6 +81,7 @@ $(document).ready(function(){
             $('#masterVoters').html(validatorSpecificInfo2.masterVoters); 
             getstakingTxs();
             getUnstakingTxs(); 
+            
         }
         setTimeout(init,1000);
         async function getstakingTxs(){
@@ -123,9 +124,9 @@ $(document).ready(function(){
                                     '</tr>';
                         });
                         $("#stakingsTxTable").html(stakingData);
-                }else{
-                    $("#stakingsTxTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
-                }    
+                    }  else{
+                        $("#stakingsTxTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
+                    }    
             }
         }
         async function getUnstakingTxs(){
@@ -170,7 +171,7 @@ $(document).ready(function(){
                         $("#UnstakingsTxTable").html(UnstakingData);
                     } else{
                         $("#UnstakingsTxTable").html('<tr><td colspan="4" style="text-align: center;">No Data Found.</td></tr>');
-                    }  
+                    }    
             }
         }
         $('#btnStake').click(async function(){
@@ -245,6 +246,7 @@ $(document).ready(function(){
                                 }
                         }   
                 }
+                waitingUnstaking = await viewContractInstance.methods.waitingUnstaking(myAccountAddress,address).call(); 
                 if(waitingUnstaking>1){
                     var seconds = secondsToDhms(waitingUnstaking);                
                     alertify.alert('Warning','Waiting time before unstake is '+seconds);
@@ -286,6 +288,7 @@ $(document).ready(function(){
                                 }
                         }   
                 }
+                waitingWithdrawProfit = await viewContractInstance.methods.waitingWithdrawProfit(myAccountAddress,address).call(); 
                 if(waitingWithdrawProfit>1){
                     var seconds = secondsToDhms(waitingWithdrawProfit);   
                     alertify.alert('Warning','Waiting time before withdraw profit is '+seconds);
@@ -327,6 +330,7 @@ $(document).ready(function(){
                                 }
                         }   
                 }
+                waitingWithdrawStaking = await viewContractInstance.methods.waitingWithdrawStaking(myAccountAddress,address).call(); 
                 if(waitingWithdrawStaking>1){
                     var seconds = secondsToDhms(waitingWithdrawStaking);   
                     alertify.alert('Warning','Waiting time before withdraw staking is '+seconds);
@@ -341,7 +345,6 @@ $(document).ready(function(){
             //
        
         });
-
     }//address ends
     
     $.urlParam = function(name){
@@ -351,19 +354,7 @@ $(document).ready(function(){
         }
         return decodeURI(results[1]) || 0;
     }
-    
-    async function getStakingTxs(){
-        var validatorAddress = $.urlParam('address');
-        var stakingInfo = await contractInstance.methods.getStakingInfo(myAccountAddress,validatorAddress).call();
-        var stakedAmount = stakingInfo[0]/Math.pow(10,decimals);
-        $('#stakedAmount').html(stakedAmount+' DTH');
-    }
 
-    async function getUnstakingTxs(){
-        var rewardsInfo = await contractInstance.methods.viewReward(myAccountAddress).call();
-        var rewardAmount = rewardsInfo/Math.pow(10,decimals);
-        $('#rewardAmount').html(rewardAmount+' DTH');
-    }
 });
 //get short user address
 function getUserAddress(userAddress){
@@ -376,3 +367,5 @@ var button = document.getElementById("addDTHNetwork");
 button.addEventListener("click",function(e){
     addNetwork();
 },false);
+
+
