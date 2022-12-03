@@ -11,6 +11,7 @@ $(document).ready(function(){
     var waitingWithdrawProfit=0;
     var waitingUnstaking=0;
     var waitingWithdrawStaking=0;
+    var waitingBlocksForUnstake=0;
     if (window.location.href.indexOf('address') > 0) {
         address = $.urlParam('address');
       }
@@ -30,7 +31,7 @@ $(document).ready(function(){
 
             //validators Table data
             const validatorSpecificInfo1 = await viewContractInstance.methods.validatorSpecificInfo1(address,myAccountAddress).call();
-            var waitingBlocksForUnstake = validatorSpecificInfo1.waitingBlocksForUnstake;
+            waitingBlocksForUnstake = validatorSpecificInfo1.waitingBlocksForUnstake;
             waitingBlocksForUnstake = waitingBlocksForUnstake/Math.pow(10,decimals);
             waitingBlocksForUnstake = waitingBlocksForUnstake.toFixed(4);
             if(waitingBlocksForUnstake>0){
@@ -336,11 +337,15 @@ $(document).ready(function(){
                     alertify.alert('Warning','Waiting time before withdraw staking is '+seconds);
                     return false;
                 }
-                var validatorAddress = $.urlParam('address');
-                const web3GasPrice = await myweb3.eth.getGasPrice();
-                var data =  contractInstance.methods.withdrawStaking(validatorAddress).encodeABI();
-                processTx(data,contractAddress,web3GasPrice,gasLimit,0,explorerURL);
-                init();
+               if(waitingBlocksForUnstake>0){
+                    var validatorAddress = $.urlParam('address');
+                    const web3GasPrice = await myweb3.eth.getGasPrice();
+                    var data =  contractInstance.methods.withdrawStaking(validatorAddress).encodeABI();
+                    processTx(data,contractAddress,web3GasPrice,gasLimit,0,explorerURL);
+                    init();
+                }else{
+                    alertify.alert('Warning','You can not withdraw becuase you have not Staked.');
+                }
             }
             //
        
