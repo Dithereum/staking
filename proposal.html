@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png">
+    <title>EGON Chain Staking Proposal Portal</title>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/alertify.min.css">
+    <style>
+      .card.c-hover:hover {
+          box-shadow: 0 3px 6px rgb(253, 255, 135), 0 3px 6px rgba(252, 67, 218, 0.61);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand logo" href="#">
+          <img src="assets/img/egonscan.png" >
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-3">
+              <button id="addBNINetwork" style="margin-top: 15px;" class="btn btn-outline-primary btn-sm"><img src="assets/img/metamask.png" alt="metamask" style="width: 16px;margin-right: 4px;">Add EGON Network</button>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </li>
+            <!-- <li class="nav-item">
+              <a class="nav-link" href="https://www.youtube.com/channel/UCDPzTaaVk4ywEsLaf6nLAeQ" target="_blank"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+            </li> -->
+          </ul>
+        </div>
+      </nav>
+    </header>
+    <!-- <div class="container-heder bg-light p-3"> -->
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div>
+              <h5>Proposal Dashboard</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- </div> -->
+    <div class="container mt-5 height-min">
+      <div class="row justify-content-center mb-5">
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1">
+          <div class="card">
+            <div class="card-body">
+              <div class="goprvL">
+                <div class="kVIsOJ">
+                  <div class="hQaNUr">Proposals</div>
+                  <div class="kBhogl">
+                    <div class="hkxpR">
+                      <div class="bvjpaI" id="proposalcnt">0</div>
+                    </div>
+                  </div>
+                </div>
+                <img src="assets/img/delegate/banner-1.png" class="styled__ImgContainer-sc-1kvcmtc-3 fRUmNW">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1">
+          <div class="card c-hover" style="cursor: pointer;" id="addproposal">
+            <div class="card-body">
+              <div class="goprvL">
+                <div class="kVIsOJ">
+                  <div class="hQaNUr text-left">Add a proposal</div>
+                  <div class="kBhogl">
+                    <div class="jJRopw">
+                      <ul class="jMrRlb">
+                        <li class="irAWPz text-left">
+                          <a  class="iVLstj">Click here to add</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <img src="assets/img/delegate/banner-3.png" class="fRUmNW"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-5">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center staking-card-right">
+          <p class="text-left">Validators</p>
+        </div>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-center staking-card-right">
+          <div class="card">
+            <div class="card-body">
+               <div class="teble-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th scope="col">Validator</th>
+                          <th scope="col">Proposer</th>
+                          <th scope="col">Time</th>
+                          <th scope="col">Status</th>
+                          <th scope="col">Action</th>
+                        </tr>
+                      </thead>
+                      <tbody id="proposalTable">
+                        <tr><td colspan="5" style="text-align: center;">Loading Data...</td></tr>
+                      </tbody>
+                    </table>
+                  </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="display:none;">
+        <div id="dlgContent">
+          <p class="my-2"> Enter validator address </p>
+          <input class="ajs-input form-control" id="valAdd" type="text" value="" />
+
+          <p  class="my-2" > Details </p>
+          <input class="ajs-input form-control" id="propdetails" value=" " type="text" value="" />
+
+        </div>
+      </div>
+
+    </div>
+    <footer class="footer bg-light py-3 mt-5">
+      <div class="container">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <p class="m-0">� 2023 onwards - <a target="_blank" href="https://egonscan.com/">EGON Chain</a>. All rights reserved</p>
+        </div>
+      </div>
+      </div>
+    </footer>
+<!-- Bootstrap -->
+
+    <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+<!-- Web3 -->
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+    <script src="assets/js/alertify.js"></script>
+    <script src="assets/js/general.js?v=0.0.3"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+    <script src="proposal.js?v=0.0.15"></script>
+
+  </body>
+</html>
