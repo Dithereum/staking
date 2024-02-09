@@ -4,8 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="assets/img/favicon.png">
-    <title>EGON Chain Staking Proposal Portal</title>
+    <link rel="icon" type="image/png" href="assets/img/custom-favicon.png">
+    <title>TestChain Staking Portal</title>
     <!-- Bootstrap -->
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -20,8 +20,8 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand logo" href="#">
-          <img src="assets/img/egonscan.png" >
+        <a class="navbar-brand logo" href="/">
+          <img src="assets/img/custom-logo.png">
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -30,7 +30,9 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item mr-3">
-              <button id="addBNINetwork" style="margin-top: 15px;" class="btn btn-outline-primary btn-sm"><img src="assets/img/metamask.png" alt="metamask" style="width: 16px;margin-right: 4px;">Add EGON Network</button>
+              <button id="addNetwork" style="margin-top: 15px;" class="btn btn-outline-primary btn-sm"><img src="assets/img/metamask.png" alt="metamask" style="width: 16px;margin-right: 4px;">Add TestChain Network</button>
+              <button class="btn btn-outline-primary btn-sm" style="margin-top: 15px;" id="connectWallet">Connect Wallet</button>
+              <button class="btn btn-outline-primary btn-sm" style="display: none;margin-top: 15px;" id="logout">Logout</button>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" target="_blank"><i class="fa fa-telegram" aria-hidden="true"></i></a>
@@ -50,24 +52,22 @@
         <div class="row">
           <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div>
-              <h5>Proposal Dashboard</h5>
-            </div>
+              <h5>Validators and Staking Dashboard</h5>
+            </div> 
           </div>
         </div>
       </div>
     <!-- </div> -->
     <div class="container mt-5 height-min">
       <div class="row justify-content-center mb-5">
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1">
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 px-1">
           <div class="card">
             <div class="card-body">
               <div class="goprvL">
                 <div class="kVIsOJ">
-                  <div class="hQaNUr">Proposals</div>
+                  <div class="hQaNUr">Validators</div>
                   <div class="kBhogl">
-                    <div class="hkxpR">
-                      <div class="bvjpaI" id="proposalcnt">0</div>
-                    </div>
+                    <div class="bRDTvY" id="validatorsText">0/100</div>
                   </div>
                 </div>
                 <img src="assets/img/delegate/banner-1.png" class="styled__ImgContainer-sc-1kvcmtc-3 fRUmNW">
@@ -75,17 +75,39 @@
             </div>
           </div>
         </div>
-        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12 px-1">
-          <div class="card c-hover" style="cursor: pointer;" id="addproposal">
+       
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 px-1">
+          <div class="card">
             <div class="card-body">
               <div class="goprvL">
                 <div class="kVIsOJ">
-                  <div class="hQaNUr text-left">Add a proposal</div>
+                  <div class="hQaNUr text-left">Total Staked Coins</div>
+                  <div class="kBhogl">
+                    <div class="hkxpR">
+                      <div class="bvjpaI" id="bondedTokens">0</div>
+                      <div class="boggGB">&nbsp;TST</div>
+                    </div>
+                  </div>
+                </div>
+                <img src="assets/img/delegate/banner-2.png" class="styled__ImgContainer-sc-1kvcmtc-3 fRUmNW"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12 px-1">
+          <div class="card c-hover" style="cursor: pointer;" id="becomeValidatorButton">
+            <div class="card-body">
+              <div class="goprvL">
+                <div class="kVIsOJ">
+                  <div class="hQaNUr text-left">Become a validator</div>
                   <div class="kBhogl">
                     <div class="jJRopw">
                       <ul class="jMrRlb">
+                        <li class="lcsIUM text-left">
+                          <a  class="iVLstj"> Minimum staking: 1,00,000 TST</a>
+                        </li>
                         <li class="irAWPz text-left">
-                          <a  class="iVLstj">Click here to add</a>
+                          <a  class="iVLstj">Click here to apply</a>
                         </li>
                       </ul>
                     </div>
@@ -108,13 +130,13 @@
                       <thead>
                         <tr>
                           <th scope="col">Validator</th>
-                          <th scope="col">Proposer</th>
-                          <th scope="col">Time</th>
+                          <th scope="col">Website</th>
+                          <th scope="col">Total Staked</th>
                           <th scope="col">Status</th>
-                          <th scope="col">Action</th>
+                          <!-- <th scope="col">Action</th> -->
                         </tr>
                       </thead>
-                      <tbody id="proposalTable">
+                      <tbody id="validatorsTable">
                         <tr><td colspan="5" style="text-align: center;">Loading Data...</td></tr>
                       </tbody>
                     </table>
@@ -125,37 +147,46 @@
       </div>
       <div style="display:none;">
         <div id="dlgContent">
-          <p class="my-2"> Enter validator address </p>
-          <input class="ajs-input form-control" id="valAdd" type="text" value="" />
-
-          <p  class="my-2" > Details </p>
-          <input class="ajs-input form-control" id="propdetails" value=" " type="text" value="" />
-
+          <p class="my-2"> Enter fee address </p>
+          <input class="ajs-input form-control" id="feeAddr" type="text" value="" />
+          
+          <p  class="my-2" style="display: none"> Enter moniker </p>
+          <input class="ajs-input form-control" id="moniker" value=" " type="hidden" value="" />
+          
+          <p class="my-2"> Enter validator name </p>
+          <input class="ajs-input form-control" id="identity" type="text" value="" />
+  
+          <p class="my-2"> Enter website </p>
+          <input class="ajs-input form-control" id="website" type="text" value="" />
+  
+          <p class="my-2"> Enter email </p>
+          <input class="ajs-input form-control" id="email" type="text" value="" />
+  
+          <p class="my-2"> Enter other details </p>
+          <input class="ajs-input form-control" id="details" type="text" value="" />
         </div>
       </div>
-
+      
     </div>
     <footer class="footer bg-light py-3 mt-5">
       <div class="container">
       <div class="row">
         <div class="col-md-12 text-center">
-          <p class="m-0">� 2022 onwards - <a target="_blank" href="https://egonscan.com/">EGON Chain</a>. All rights reserved</p>
+          <p class="m-0">© 2023 onwards - <a target="_blank" href="https://explorer.testchain.com/">TestChain Network</a>. All rights reserved</p>
         </div>
       </div>
       </div>
     </footer>
 <!-- Bootstrap -->
-
     <script src="assets/js/jquery-3.5.1.slim.min.js"></script>
     <script src="assets/js/popper.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
 <!-- Web3 -->
     <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
-    <!-- <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script> -->
+    
     <script src="assets/js/alertify.js"></script>
-    <script src="assets/js/general.js?v=0.0.3"></script>
-    <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
-    <script src="proposal.js?v=0.0.15"></script>
-
+    <script src="assets/js/general.js?v=0.0.5"></script>
+    <script src="assets/js/script.js?v=0.0.5"></script>
+    
   </body>
 </html>
