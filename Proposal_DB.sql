@@ -16,3 +16,5 @@ CREATE TABLE `proposals` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+//check for the last block update in the existing log table.. add a column if required
